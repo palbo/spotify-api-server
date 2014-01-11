@@ -1,4 +1,4 @@
-CFLAGS = -std=c99 -Wall -I/usr/include/subversion-1 $(shell apr-1-config --includes)
+CFLAGS = -std=c99 -Wall -I/usr/local/include/subversion-1 $(shell apr-1-config --includes)
 LDLIBS = -lspotify -levent -levent_pthreads -ljansson -lsvn_diff-1 -lsvn_subr-1 $(shell apr-1-config --link-ld --libs)
 
 SOURCES = diff.c json.c server.c main.c
