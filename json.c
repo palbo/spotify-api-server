@@ -64,9 +64,13 @@ json_t *playlist_to_json(sp_playlist *playlist, json_t *object) {
 
   for (int i = 0; i < sp_playlist_num_tracks(playlist); i++) {
     sp_track *track = sp_playlist_track(playlist, i);
+    int create_time = sp_playlist_track_create_time(playlist, i);
     sp_link *track_link = sp_link_create_from_track(track, 0);
     sp_link_as_string(track_link, track_uri, kTrackLinkLength);
-    json_array_append_new(tracks, json_string_nocheck(track_uri));
+    json_t *track_array = json_array();
+    json_array_append_new(track_array, json_string_nocheck(track_uri));
+    json_array_append_new(track_array, json_integer(create_time));
+    json_array_append_new(tracks, track_array);
     sp_link_release(track_link);
   }
 
